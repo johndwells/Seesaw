@@ -1,4 +1,4 @@
-Seesaw Add-On (0.5.0)
+Seesaw
 ======================================================================
 
 Seesaw is an ExpressionEngine 1.6x extension that allows you to configure
