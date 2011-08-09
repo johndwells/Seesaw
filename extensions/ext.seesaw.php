@@ -7,7 +7,7 @@
  * See accompanying README file for more.
  *
  * @package Seesaw
- * @version 0.5.0
+ * @version 0.5.1
  * @author John D Wells <http://johndwells.com>
  * @see http://johndwells.com/software
  * @copyright Copyright (c) 2009-2010 John D Wells
@@ -17,7 +17,7 @@
 
 if ( ! defined('EXT')) exit('Invalid file request');
 
-define('Seesaw_version',			'0.5.0');
+define('Seesaw_version',			'0.5.1');
 define('Seesaw_docs_url',			'http://johndwells.com/software');
 define('Seesaw_addon_id',			'Seesaw');
 define('Seesaw_extension_class',	'Seesaw');
@@ -29,7 +29,7 @@ define('Seesaw_extension_class',	'Seesaw');
  * Now you see 'em, now you don't. Seesaw allows you to configure the Edit Channel Entries page to show/hide columns on a channel by channel basis.
  *
  * @package Seesaw
- * @version 0.5.0
+ * @version 0.5.1
  * @author John D Wells <http://johndwells.com>
  * @see http://johndwells.com/software
  * @copyright Copyright (c) 2009-2010 John D Wells
