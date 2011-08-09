@@ -426,7 +426,7 @@ class Seesaw
 	function edit_entries_modify_tableheader($out)
 	{
 
-		global $IN, $EXT;
+		global $IN, $EXT, $FNS;
 
 		$out = ($EXT->last_call !== FALSE) ? $EXT->last_call : $out;
 		
@@ -444,9 +444,26 @@ class Seesaw
 		// to avoid being destructive, let's replace all table cells with Seesaw, and then restore as we go
 		$out = preg_replace('#<t(h|d) [^>]*>.*?</t(h|d)[^>]*>#is', 'Seesaw', $out);
 
-		$channel_id  = 'channel_';
-		$channel_id .= ($IN->GBL('weblog_id') && $IN->GBL('weblog_id') != 'null') ? $IN->GBL('weblog_id') : '0';
+		// if we're at main edit page?
+		if(! $IN->GBL('weblog_id') || $IN->GBL('weblog_id') == 'null') {
+
+			// Edge case: If user is only allowed to access one weblog, then the main edit page
+			// will effectively be this view
+			$allowed_blogs = $FNS->fetch_assigned_weblogs();
+			if (count($allowed_blogs) == 1)
+			{
+				$channel_id = $allowed_blogs[0];
+			} else {
+				$channel_id = '0';
+			}
+		} 
+		else
+		{
+			$channel_id = $IN->GBL('weblog_id');
+		}
 		
+		$channel_id = 'channel_' . $channel_id;
+
 		$idx = 0; // $idx helps us keep track of any additional headers that have to be put back in at the end
 		foreach($supported_core_keys as $core_field) {
 
@@ -486,7 +503,7 @@ class Seesaw
 	function edit_entries_modify_tablerow($out)
 	{
 
-		global $IN, $EXT;
+		global $IN, $EXT, $FNS;
 
 		$out = ($EXT->last_call !== FALSE) ? $EXT->last_call : $out;
 
@@ -504,8 +521,25 @@ class Seesaw
 		// to avoid being destructive, let's replace all table cells with Seesaw, and then restore as we go
 		$out = preg_replace('#<td[^>]*>.*?</td[^>]*>#is', 'Seesaw', $out);
 
-		$channel_id  = 'channel_';
-		$channel_id .= ($IN->GBL('weblog_id') && $IN->GBL('weblog_id') != 'null') ? $IN->GBL('weblog_id') : '0';
+		// if we're at main edit page?
+		if(! $IN->GBL('weblog_id') || $IN->GBL('weblog_id') == 'null') {
+
+			// Edge case: If user is only allowed to access one weblog, then the main edit page
+			// will effectively be this view
+			$allowed_blogs = $FNS->fetch_assigned_weblogs();
+			if (count($allowed_blogs) == 1)
+			{
+				$channel_id = $allowed_blogs[0];
+			} else {
+				$channel_id = '0';
+			}
+		} 
+		else
+		{
+			$channel_id = $IN->GBL('weblog_id');
+		}
+		
+		$channel_id = 'channel_' . $channel_id;
 
 		$idx = 0;
 		foreach($supported_core_keys as $core_field) {
